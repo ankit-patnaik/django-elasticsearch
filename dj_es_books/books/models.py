@@ -99,7 +99,7 @@ class Book(models.Model):
     description = models.TextField(null=True, blank=True)
     summary = models.TextField(null=True, blank=True)
     authors = models.ManyToManyField('books.Author', related_name='books')
-    publisher = models.ForeignKey(Publisher, related_name='books')
+    publisher = models.ForeignKey(Publisher, related_name='books', on_delete=models.CASCADE)
     publication_date = models.DateField()
     state = models.CharField(max_length=100,
                              choices=BOOK_PUBLISHING_STATUS_CHOICES,

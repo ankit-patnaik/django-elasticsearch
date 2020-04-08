@@ -24,3 +24,6 @@ env
 
 # Don't Track Editor Files
 .vscode
+
+# Don't track local db file
+*.sqlite3
