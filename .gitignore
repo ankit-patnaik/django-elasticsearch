@@ -1,0 +1,26 @@
+# do NOT track Python compilation files
+*.py[cod]
+__python__/*
+
+# do NOT track tox's testing folder
+.tox
+
+# do NOT track coverage files/folders
+.coverage
+coverage_html
+
+# do NOT track compiled language files
+*.mo
+*.pot
+
+.idea
+*.log*
+venv
+env
+
+.DS_Store
+.coveragerc
+.editorconfig
+
+# Don't Track Editor Files
+.vscode

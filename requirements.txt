@@ -1,0 +1,47 @@
+# Django framework
+Django==3.0.5
+
+# DRF for making REST APIs
+djangorestframework==3.11.0
+
+# Django elasticsearch DRF
+django-elasticsearch-dsl-drf==0.20.6
+
+## Database and Email settings
+#dj-database-url==0.5.0
+#dj-email-url==0.2.0
+
+## Swagger for DRF
+#drf-yasg==1.16.1
+#packaging==19.2
+
+## Postgresql support for django
+#psycopg2==2.8.3
+
+## Serve Static content
+#whitenoise==4.1.4
+
+## To store datetime in timestamp format
+#django_unixdatetimefield==1.0.3
+
+## Import variables from .env file
+#python-decouple==3.1
+
+## Django Crispy Forms
+#django-crispy-forms==1.9.0
+
+## Redis related stuff
+#redis==3.4.1
+#django-redis==4.11.0
+
+# DEBUGGING TOOLS
+ipdb==0.12.3
+
+## Import and Export stuff
+#django-import-export==2.0.2
+
+## Pycryptodome : To Encrypt using cryptographic algorithms (AES) .
+#pycryptodome==3.9.7
+
+## CELERY
+#celery==4.4.1
