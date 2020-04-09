@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'books',           # Books application
     'search_indexes',  # Elasticsearch integration with the Django
     'rest_framework',  # REST framework
+    'django_elasticsearch_dsl',  # Django Elasticsearch integration
+    'django_elasticsearch_dsl_drf',  # Django REST framework Elasticsearch integration (this package)
 ]
 
 MIDDLEWARE = [
@@ -121,3 +123,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Name of the Elasticsearch index
+ELASTICSEARCH_INDEX_NAMES = {
+    'search_indexes.documents.book': 'book',
+    'search_indexes.documents.publisher': 'publisher',
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
+    'ORDERING_PARAM': 'ordering',
+}
+
+# Elasticsearch configuration
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
