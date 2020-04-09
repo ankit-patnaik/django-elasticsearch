@@ -1,5 +1,5 @@
 from django.conf import settings
-from django_elasticsearch_dsl import Document, Index, fields
+from django_elasticsearch_dsl import DocType as Document, Index, fields
 from elasticsearch_dsl import analyzer
 
 from books.models import Book
@@ -16,7 +16,7 @@ INDEX.settings(
 html_strip = analyzer(
     'html_strip',
     tokenizer="standard",
-    filter=["standard", "lowercase", "stop", "snowball"],
+    filter=["lowercase", "stop", "snowball"],
     char_filter=["html_strip"]
 )
 
@@ -30,21 +30,21 @@ class BookDocument(Document):
     title = fields.TextField(
         analyzer=html_strip,
         fields={
-            'raw': fields.TextField(analyzer='keyword'),
+            'raw': fields.TextField(analyzer='keyword', fielddata=True),
         }
     )
 
     description = fields.TextField(
         analyzer=html_strip,
         fields={
-            'raw': fields.TextField(analyzer='keyword'),
+            'raw': fields.TextField(analyzer='keyword',fielddata=True),
         }
     )
 
     summary = fields.TextField(
         analyzer=html_strip,
         fields={
-            'raw': fields.TextField(analyzer='keyword'),
+            'raw': fields.TextField(analyzer='keyword',fielddata=True),
         }
     )
 
@@ -52,7 +52,7 @@ class BookDocument(Document):
         attr='publisher_indexing',
         analyzer=html_strip,
         fields={
-            'raw': fields.TextField(analyzer='keyword'),
+            'raw': fields.TextField(analyzer='keyword',fielddata=True),
         }
     )
 
@@ -61,18 +61,22 @@ class BookDocument(Document):
     state = fields.TextField(
         analyzer=html_strip,
         fields={
-            'raw': fields.TextField(analyzer='keyword'),
+            'raw': fields.TextField(analyzer='keyword',fielddata=True),
         }
     )
 
     isbn = fields.TextField(
         analyzer=html_strip,
         fields={
-            'raw': fields.TextField(analyzer='keyword'),
-        }
+            'raw': fields.TextField(analyzer='keyword', fielddata=True),
+        },fielddata=True
     )
 
-    price = fields.FloatField()
+    price = fields.FloatField(
+        fields={
+            'raw': fields.FloatField(),
+        }
+    )
 
     pages = fields.IntegerField()
 
@@ -84,11 +88,11 @@ class BookDocument(Document):
         fields={
             'raw': fields.TextField(analyzer='keyword', multi=True),
             'suggest': fields.CompletionField(multi=True),
-        },
+        },fielddata=True,
         multi=True
     )
 
-    class Django(object):
+    class Meta(object):
         """Inner nested class Django."""
 
         model = Book  # The model associate with this Document

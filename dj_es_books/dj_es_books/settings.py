@@ -147,3 +147,42 @@ ELASTICSEARCH_DSL = {
         'hosts': 'localhost:9200'
     },
 }
+
+# ##### LOGGING ##########################################
+
+LOG_DIR = os.environ.get('LOG_DIR', '')
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {"format": "%(levelname)s %(asctime)s %(name)s %(message)s"},
+    },
+    "filters": {
+        "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"},
+        "require_debug_true": {"()": "django.utils.log.RequireDebugTrue"},
+    },
+    "handlers": {
+        "mail_admins": {
+            "level": "ERROR",
+            "filters": ["require_debug_false"],
+            "class": "django.utils.log.AdminEmailHandler",
+        },
+        "console": {
+            "level": "ERROR",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+        "sql": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "filters": ["require_debug_true"],
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "django": {"handlers": ["console"], "level": "ERROR", "propagate": False},
+        "django.request": {"handlers": ["mail_admins"], "level": "ERROR", "propagate": True},
+        "herofin": {"handlers": ["console"], "level": "DEBUG", "propagate": True},
+        "django.db.backends": {"handlers": ["sql"], "level": "DEBUG", "propagate": False, },
+    },
+}
