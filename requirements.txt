@@ -5,7 +5,10 @@ Django==3.0.5
 djangorestframework==3.11.0
 
 # Django elasticsearch DRF
-django-elasticsearch-dsl-drf==0.20.6
+django-elasticsearch-dsl-drf
+
+# DRF Extension
+drf-extensions
 
 #Imaging library
 Pillow==7.1.1
