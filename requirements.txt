@@ -2,7 +2,7 @@
 Django==2.2.13
 
 # DRF for making REST APIs
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 
 # Django elasticsearch DRF
 django-elasticsearch-dsl-drf
