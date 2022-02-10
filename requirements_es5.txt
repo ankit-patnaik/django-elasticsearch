@@ -1,7 +1,7 @@
 asgiref==3.2.7
 backcall==0.1.0
 decorator==4.4.2
-Django==2.2.13
+Django==2.2.27
 django-elasticsearch-dsl==0.5.1
 django-elasticsearch-dsl-drf==0.18
 django-nine==0.2.3
